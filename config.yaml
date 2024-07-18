@@ -46,36 +46,76 @@ bar:
   position: "top"
   opacity: 1.0
   background: "#20242cc4"
-  foreground: "#ffffff"
   font_family: "Segoe UI"
   font_size: "13px"
   padding: "4px 6px"
   offset_x: "0"
   offset_y: "0"
   border_radius: "0"
+  component_separator:
+    label: "   |   "
   components_left:
     - type: "workspaces"
       focused_workspace_background: "#ffffff33"
       displayed_workspace_background: "#00000033"
       default_workspace_background: "transparent"
+    - type: "cpu"
+      label: "CPU: {percent_usage}%"
+      refresh_interval_ms: 1000
+    - type: "gpu"
+      label: "GPU: {percent_usage}%"
+      refresh_interval_ms: 1000
   components_center:
     - type: "window title"
   components_right:
-    - type: "system tray"
-    - type: "tiling direction"
-      label_horizontal: "⮂"
-      label_vertical: "⮁"
-      background: "#ffffff33"
-      margin: "0 4px"
-      padding: "0 8px"
-    - type: "binding mode"
-      background: "#ffffff33"
-      margin: "0 4px 0 0"
-      padding: "0 8px"
+    # - type: "system tray"
+    # - type: "tiling direction"
+    #   label_horizontal: "⮂"
+    #   label_vertical: "⮁"
+    #   background: "#ffffff33"
+    #   margin: "0 4px"
+    #   padding: "0 8px"
+    # - type: "binding mode"
+    #   background: "#ffffff33"
+    #   margin: "0 4px 0 0"
+    #   padding: "0 8px"
+    # - type: "weather"
+    #   latitude: 40.6892
+    #   longitude: 74.0445
+    #   label: "{temperature_celsius}°C"
+    #   label_sun: "☀️ {temperature_celsius}°C"
+    #   label_moon: "🌙 {temperature_celsius}°C"
+    #   label_cloud_moon: "🌙☁️ {temperature_celsius}°C"
+    #   label_cloud_sun: "⛅ {temperature_celsius}°C"
+    #   label_cloud_moon_rain: "🌙🌧️ {temperature_celsius}°C"
+    #   label_cloud_sun_rain: "🌦️ {temperature_celsius}°C"
+    #   label_cloud_rain: "🌧️ {temperature_celsius}°C"
+    #   label_snow_flake: "❄️ {temperature_celsius}°C"
+    #   label_thunderstorm: "⚡ {temperature_celsius}°C"
+    #   label_cloud: "☁️ {temperature_celsius}°C"
+    #   - type: "image"
+    # source: "C:\\Folder\\AnotherFolder\\image.png"
+    - type: "battery"
+      label_draining: "{battery_level}% remaining"
+      label_power_saver: "{battery_level}% (power saver)"
+      label_charging: "{battery_level}% (charging)"
+    - type: "volume"
+      label_low: "🔊{volume_level}%"
+      label_medium: "🔊{volume_level}%"
+      label_high: "🔊{volume_level}%"
+      label_mute: "🔊{volume_level}%"
     - type: "clock"
       # Documentation on formatting date/time string:
       # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
       time_formatting: "hh:mm tt  ddd MMM d"
+    - type: "network"
+      label_no_internet: "NC"
+      label_ethernet: "Eth"
+      label_wifi_strength_0: "WiFi: 0%"
+      label_wifi_strength_25: "WiFi: 25%"
+      label_wifi_strength_50: "WiFi: 50%"
+      label_wifi_strength_75: "WiFi: 75%"
+      label_wifi_strength_100: "WiFi: 100%"
 
 workspaces:
   - name: "1"
@@ -108,21 +148,21 @@ window_rules:
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
 
-binding_modes:
-  - name: "resize"
-    keybindings:
-      # Resize focused window by a percentage or pixel amount.
-      - command: "resize width -2%"
-        bindings: ["Alt+-", "Left"]
-      - command: "resize width +2%"
-        bindings: ["Alt+=", "Right"]
-      - command: "resize height +2%"
-        bindings: ["Alt++", "Up"]
-      - command: "resize height -2%"
-        bindings: ["Alt+_", "Down"]
-      # Press enter/escape to return to default keybindings.
-      - command: "binding mode none"
-        bindings: ["Escape", "Enter"]
+#binding_modes:
+#  - name: "resize"
+#    keybindings:
+#      # Resize focused window by a percentage or pixel amount.
+#      - command: "resize width -2%"
+#        bindings: ["Alt+Shift+-", "Left"]
+#      - command: "resize width +2%"
+#        bindings: ["Alt+Shift+=", "Right"]
+#      - command: "resize height +2%"
+#        bindings: ["Alt+-", "Up"]
+#      - command: "resize height -2%"
+#        bindings: ["Alt+=", "Down"]
+#      # Press enter/escape to return to default keybindings.
+#      - command: "binding mode none"
+#        bindings: ["Escape", "Enter"]
 
 keybindings:
   # Shift focus in a given direction.
@@ -157,16 +197,16 @@ keybindings:
 
   # As an alternative to the resize keybindings above, resize mode enables resizing via
   # HJKL or arrow keys. The binding mode is defined above with the name "resize".
-  - command: "binding mode resize"
-    binding: "Alt+R"
+  #- command: "binding mode resize"
+  #  binding: "Alt+R"
 
   # Change tiling direction. This determines where new tiling windows will be inserted.
   - command: "tiling direction toggle"
     binding: "Alt+V"
 
   # Change focus between floating / tiling windows.
-#  - command: "focus mode toggle"
-#    binding: "Alt+Space"
+  #  - command: "focus mode toggle"
+  #    binding: "Alt+Space"
 
   # Change the focused window to be floating / tiling.
   - command: "toggle floating"
@@ -202,10 +242,10 @@ keybindings:
     binding: "Alt+Y"
 
   # Focus the next/previous workspace defined in `workspaces` config.
-  - command: "focus workspace next"
-    binding: "Alt+T"
-  - command: "focus workspace prev"
-    binding: "Alt+Shift+T"
+  #  - command: "focus workspace next"
+  #    binding: "Alt+T"
+  #  - command: "focus workspace prev"
+  #    binding: "Alt+Shift+T"
 
   # Change focus to a workspace defined in `workspaces` config.
   - command: "focus workspace 1"
