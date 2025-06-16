@@ -187,13 +187,13 @@ keybindings:
 
   # Resize focused window by a percentage or pixel amount.
   - command: "resize width -2%"
-    binding: "Alt+U"
+    binding: "Alt+Shift+U"
   - command: "resize width +2%"
-    binding: "Alt+P"
+    binding: "Alt+Shift+P"
   - command: "resize height +2%"
-    binding: "Alt+O"
+    binding: "Alt+Shift+O"
   - command: "resize height -2%"
-    binding: "Alt+I"
+    binding: "Alt+Shift+I"
 
   # As an alternative to the resize keybindings above, resize mode enables resizing via
   # HJKL or arrow keys. The binding mode is defined above with the name "resize".
